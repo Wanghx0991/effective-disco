@@ -1,11 +1,8 @@
+from logger import *
+from stock import *
 import requests
-from stock import IsTradeTime
-from dateutil import parser
 from time import sleep
-import logging
-
-logging.basicConfig(format='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s',
-                    level=logging.INFO)
+from dateutil import parser
 
 
 class Tick:
@@ -22,11 +19,7 @@ class Tick:
         self.high = None
         self.started = None
         self.closed = None
-        self.symbol = symbol
-        if self.symbol.startswith('6'):
-            self.symbol = 'sh' + self.symbol
-        elif self.symbol.startswith('0'):
-            self.symbol = 'sz' + self.symbol
+        self.symbol = processSymbol(symbol)
 
     def getTick(self):
         resp = requests.get(self.Tencent + self.symbol).text
@@ -41,11 +34,12 @@ class Tick:
 if __name__ == '__main__':
     tick = Tick('600036')
     while IsTradeTime():
-        started, closed = [], []
         tick.getTick()
-        started.append(tick.started)
-        closed.append(tick.closed)
-        logging.info(
-            'code = %s, price = %f, tim = %s, started = %f, vol = %d' % (tick.symbol, tick.closed, tick.trade_datetime,
-                                                                         tick.started, tick.last_volume))
-        sleep(5)
+        # print('code = %s, price = %f, trade_time = %s, started = %f, vol = %d' % (tick.symbol, tick.closed,
+        # tick.trade_datetime, tick.started, tick.last_volume))
+        logger.info(
+            'code = %s, price = %f, trade_time = %s, started = %f, vol = %d' % (
+                tick.symbol, tick.closed, tick.trade_datetime,
+                tick.started, tick.last_volume)
+        )
+        sleep(2)

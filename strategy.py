@@ -13,6 +13,4 @@ class Strategy:
         pass
 
 
-
-
 strategy = Strategy(start_date='20200101', end_date='20200906', ma=10, code='603777')

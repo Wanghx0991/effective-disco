@@ -1,5 +1,4 @@
-from strategy import Strategy
-from stock import GetHistoryData
+from stock import GetAkHistoryData
 
 
 class Bar:
@@ -22,7 +21,7 @@ class Bar:
 
 
 if __name__ == '__main__':
-    summary = GetHistoryData(symbol='603777', start_date='20200701', end_date='20200906')
+    summary = GetAkHistoryData(symbol='603777', start_date='20200701', end_date='20200906')
 
     splitBy = 5
     discarded = int(len(summary)) % splitBy
@@ -38,4 +37,4 @@ if __name__ == '__main__':
         obj = Bar()
         obj.buildBar(high_arr,low_arr,started_arr,closed_arr)
         bars[i] = obj
-    pass
+
