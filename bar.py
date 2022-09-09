@@ -2,7 +2,7 @@
 
 
 class Bar:
-    def __init__(self, frequency='d'):
+    def __init__(self, frequency="d"):
         self.eob = None  # bar结束时间
         self.bob = None  # bar开始时间
         self.volume = None  # int
@@ -20,7 +20,7 @@ class Bar:
         self.closed = closed_arr[-1][-1]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass
     # summary = GetAkHistoryData(symbol='603777', start_date='20200701', end_date='20200906')
     #
@@ -38,4 +38,3 @@ if __name__ == '__main__':
     #     obj = Bar()
     #     obj.buildBar(high_arr,low_arr,started_arr,closed_arr)
     #     bars[i] = obj
-

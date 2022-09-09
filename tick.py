@@ -6,7 +6,7 @@ from dateutil import parser
 
 
 class Tick:
-    Tencent = 'https://qt.gtimg.cn/q='
+    Tencent = "https://qt.gtimg.cn/q="
 
     def __init__(self, symbol):
         self.last_volume = None  # 瞬时成交量
@@ -31,14 +31,19 @@ class Tick:
         self.last_volume = int(raw[6])
 
 
-if __name__ == '__main__':
-    logger = Logger('./logs/2022/app.log', 'debug', 'D', 1).logger
-    tick = Tick('600036')
+if __name__ == "__main__":
+    logger = Logger("./logs/2022/app.log", "debug", "D", 1).logger
+    tick = Tick("600036")
     while IsTradeTime():
         tick.getTick()
         logger.info(
-            'code = %s, price = %f, trade_time = %s, started = %f, vol = %d' % (
-                tick.symbol, tick.closed, tick.trade_datetime,
-                tick.started, tick.last_volume)
+            "code = %s, price = %f, trade_time = %s, started = %f, vol = %d"
+            % (
+                tick.symbol,
+                tick.closed,
+                tick.trade_datetime,
+                tick.started,
+                tick.last_volume,
+            )
         )
         sleep(2)
