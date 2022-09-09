@@ -1,0 +1,13 @@
+2022-09-08 22:02:08,261 - /Users/wanghaoxin/PycharmProjects/effective-disco/tick.py[line:41]INFO: code = sh600036, price = 33.300000, trade_time = 2022-09-08 16:00:01, started = 33.370000, vol = 416672
+2022-09-08 22:02:10,416 - /Users/wanghaoxin/PycharmProjects/effective-disco/tick.py[line:41]INFO: code = sh600036, price = 33.300000, trade_time = 2022-09-08 16:00:01, started = 33.370000, vol = 416672
+2022-09-08 22:02:12,562 - /Users/wanghaoxin/PycharmProjects/effective-disco/tick.py[line:41]INFO: code = sh600036, price = 33.300000, trade_time = 2022-09-08 16:00:01, started = 33.370000, vol = 416672
+2022-09-08 22:02:14,702 - /Users/wanghaoxin/PycharmProjects/effective-disco/tick.py[line:41]INFO: code = sh600036, price = 33.300000, trade_time = 2022-09-08 16:00:01, started = 33.370000, vol = 416672
+2022-09-08 22:02:16,868 - /Users/wanghaoxin/PycharmProjects/effective-disco/tick.py[line:41]INFO: code = sh600036, price = 33.300000, trade_time = 2022-09-08 16:00:01, started = 33.370000, vol = 416672
+2022-09-08 22:02:19,018 - /Users/wanghaoxin/PycharmProjects/effective-disco/tick.py[line:41]INFO: code = sh600036, price = 33.300000, trade_time = 2022-09-08 16:00:01, started = 33.370000, vol = 416672
+2022-09-08 22:02:21,170 - /Users/wanghaoxin/PycharmProjects/effective-disco/tick.py[line:41]INFO: code = sh600036, price = 33.300000, trade_time = 2022-09-08 16:00:01, started = 33.370000, vol = 416672
+2022-09-08 22:02:23,320 - /Users/wanghaoxin/PycharmProjects/effective-disco/tick.py[line:41]INFO: code = sh600036, price = 33.300000, trade_time = 2022-09-08 16:00:01, started = 33.370000, vol = 416672
+2022-09-08 22:02:25,470 - /Users/wanghaoxin/PycharmProjects/effective-disco/tick.py[line:41]INFO: code = sh600036, price = 33.300000, trade_time = 2022-09-08 16:00:01, started = 33.370000, vol = 416672
+2022-09-09 09:24:47,002 - tick.py[line:39]INFO: code = sh600036, price = 33.380000, trade_time = 2022-09-09 09:24:45, started = 0.000000, vol = 0
+2022-09-09 09:24:49,144 - tick.py[line:39]INFO: code = sh600036, price = 33.380000, trade_time = 2022-09-09 09:24:45, started = 0.000000, vol = 0
+2022-09-09 09:24:51,281 - tick.py[line:39]INFO: code = sh600036, price = 33.400000, trade_time = 2022-09-09 09:24:48, started = 0.000000, vol = 0
+2022-09-09 09:24:53,426 - tick.py[line:39]INFO: code = sh600036, price = 33.420000, trade_time = 2022-09-09 09:24:51, started = 0.000000, vol = 0

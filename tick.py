@@ -1,5 +1,5 @@
 from logger import *
-from stock import *
+from DataSource import *
 import requests
 from time import sleep
 from dateutil import parser
@@ -32,11 +32,10 @@ class Tick:
 
 
 if __name__ == '__main__':
+    logger = Logger('./logs/2022/app.log', 'debug', 'D', 1).logger
     tick = Tick('600036')
     while IsTradeTime():
         tick.getTick()
-        # print('code = %s, price = %f, trade_time = %s, started = %f, vol = %d' % (tick.symbol, tick.closed,
-        # tick.trade_datetime, tick.started, tick.last_volume))
         logger.info(
             'code = %s, price = %f, trade_time = %s, started = %f, vol = %d' % (
                 tick.symbol, tick.closed, tick.trade_datetime,
