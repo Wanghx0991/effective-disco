@@ -18,13 +18,13 @@ def is_pattern_exist(pattern):
 
 def vwap(data):
     ret = data.ta.vwap(append=True)
-    data.rename(columns={"VWAP_D": "vwap"})
+    data.rename(columns={"VWAP_D": "vwap"}, inplace=True)
     return ret
 
 
 def obv(data):
     ret = data.ta.obv(append=True)
-    data.rename(columns={"OBV": "obv"})
+    data.rename(columns={"OBV": "obv"}, inplace=True)
     return ret
 
 

@@ -12,7 +12,7 @@ class MyTestCase(unittest.TestCase):
         interval = "daily"
         start_date, end_date = "20220601", "20220908"
         title = "%s_%s_%s" % (symbol, interval, start_date)
-        self.cli = Charter(symbol=symbol, title=title)
+        self.cli = Charter(sym=symbol, tit=title)
         self.cli_datasource = Akshare()
         self.data = self.cli_datasource.stock_zh_a_hist(
             symbol, start_date=start_date, end_date=end_date
