@@ -2,7 +2,6 @@ import unittest
 from chart.charter import Charter
 
 from datasource.akshare_source import Akshare
-from operator import methodcaller
 
 
 class MyTestCase(unittest.TestCase):

@@ -18,11 +18,11 @@ class MyTestCase(unittest.TestCase):
 
     def test_obv(self):
         obv(self.data)
-        self.assertIsNotNone(self.data["OBV"])
+        self.assertIsNotNone(self.data["obv"])
 
     def test_vwap(self):
         vwap(self.data)
-        self.assertIsNotNone(self.data["VWAP_D"])
+        self.assertIsNotNone(self.data["vwap"])
 
     def test_bbands(self):
         bbands(self.data)

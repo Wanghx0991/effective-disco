@@ -1,5 +1,5 @@
 from datasource.akshare_source import Akshare
-from .metrics import vwap,bbands
+from metrics import vwap,bbands
 # from metrics import vwap,bbands
 import mplfinance as mpf
 import matplotlib.animation as animation
@@ -48,11 +48,10 @@ data.loc[data["sig"] != "up", "up"] = float('nan')
 data["down"] = data["high"] + 0.1
 data.loc[data["sig"] != "down", "down"] = float('nan')
 
-
 warmup = 10
 sty = mpf.make_mpf_style(
-        base_mpf_style="nightclouds", marketcolors=mpf.make_marketcolors(up="#ff8500", down="#1b90a7", inherit=True)
-    )
+    base_mpf_style="nightclouds", marketcolors=mpf.make_marketcolors(up="#ff8500", down="#1b90a7", inherit=True)
+)
 kwargs = dict(
     type="candle",
     volume=True,
@@ -66,7 +65,6 @@ kwargs = dict(
         mpf.make_addplot(data['down'], type='scatter', marker='v', color='yellow', markersize=200),
     ],
 )
-
 
 fig, axes = mpf.plot(data, returnfig=True, **kwargs)
 ax1 = axes[0]
