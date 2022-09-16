@@ -1,6 +1,5 @@
 from datasource.common import processSymbol, IsTradeTime
 from logs.logger import *
-from DataSource import *
 import requests
 from time import sleep
 from dateutil import parser
