@@ -1,43 +1,78 @@
-import backtrader as bt
+from datetime import datetime
 
-from datasource.akshare_source import Akshare
+import backtrader as bt  # 升级到最新版
+import matplotlib.pyplot as plt  # 由于 Backtrader 的问题，此处要求 pip install matplotlib==3.2.2
+import akshare as ak  # 升级到最新版
+import pandas as pd
 
 
-class SmaCross(bt.SignalStrategy):
+# 利用 AKShare 获取股票的后复权数据，这里只获取前 6 列
+stock_hfq_df = ak.stock_zh_a_hist(symbol="000001", adjust="hfq").iloc[:, :6]
+# 处理字段命名，以符合 Backtrader 的要求
+stock_hfq_df.columns = [
+    'date',
+    'open',
+    'close',
+    'high',
+    'low',
+    'volume',
+]
+# 把 date 作为日期索引，以符合 Backtrader 的要求
+stock_hfq_df.index = pd.to_datetime(stock_hfq_df['date'])
+
+
+class MyStrategy(bt.Strategy):
+    """
+    主策略程序
+    """
+    params = (("maperiod", 20),)  # 全局设定交易策略的参数
+
     def __init__(self):
-        sma1, sma2 = bt.ind.SMA(period=10), bt.ind.SMA(period=30)
-        crossover = bt.ind.CrossOver(sma1, sma2)
-        self.signal_add(bt.SIGNAL_LONG, crossover)
+        """
+        初始化函数
+        """
+        self.data_close = self.datas[0].close  # 指定价格序列
+        # 初始化交易指令、买卖价格和手续费
+        self.order = None
+        self.buy_price = None
+        self.buy_comm = None
+        # 添加移动均线指标
+        self.sma = bt.indicators.SimpleMovingAverage(
+            self.datas[0], period=self.params.maperiod
+        )
+
+    def next(self):
+        """
+        执行逻辑
+        """
+        if self.order:  # 检查是否有指令等待执行,
+            return
+        # 检查是否持仓
+        if not self.position:  # 没有持仓
+            if self.data_close[0] > self.sma[0]:  # 执行买入条件判断：收盘价格上涨突破20日均线
+                self.order = self.buy(size=100)  # 执行买入
+        else:
+            if self.data_close[0] < self.sma[0]:  # 执行卖出条件判断：收盘价格跌破20日均线
+                self.order = self.sell(size=100)  # 执行卖出
 
 
-cerebro = bt.Cerebro()
-cerebro.addstrategy(SmaCross)
+cerebro = bt.Cerebro()  # 初始化回测系统
+start_date = datetime(1991, 4, 3)  # 回测开始时间
+end_date = datetime(2020, 6, 16)  # 回测结束时间
+data = bt.feeds.PandasData(dataname=stock_hfq_df, fromdate=start_date, todate=end_date)  # 加载数据
+cerebro.adddata(data)  # 将数据传入回测系统
+cerebro.addstrategy(MyStrategy)  # 将交易策略加载到回测系统中
+start_cash = 1000000
+cerebro.broker.setcash(start_cash)  # 设置初始资本为 100000
+cerebro.broker.setcommission(commission=0.002)  # 设置交易手续费为 0.2%
+cerebro.run()  # 运行回测系统
 
-# symbol = "600036"
-# interval = "daily"
-# start_date, end_date = "20220715", "20220908"
-# title = "%s_%s_%s" % (symbol, interval, start_date)
-#
-# cli = Akshare()
-# data = cli.stock_zh_a_hist(symbol, start_date=start_date, end_date=end_date)
+port_value = cerebro.broker.getvalue()  # 获取回测结束后的总资金
+pnl = port_value - start_cash  # 盈亏统计
 
+print(f"初始资金: {start_cash}\n回测期间：{start_date.strftime('%Y%m%d')}:{end_date.strftime('%Y%m%d')}")
+print(f"总资金: {round(port_value, 2)}")
+print(f"净收益: {round(pnl, 2)}")
 
-if __name__ == '__main__':
-    # 创建Cerebro引擎
-    cerebro = bt.Cerebro()
-    # Cerebro引擎在后台创建broker(经纪人)，系统默认资金量为10000
-
-    # 设置投资金额100000.0
-    cerebro.broker.setcash(100000.0)
-    # 引擎运行前打印期出资金
-    print('组合期初资金: %.2f' % cerebro.broker.getvalue())
-
-
-
-
-
-    cerebro.run()
-    # 引擎运行后打期末资金
-    print('组合期末资金: %.2f' % cerebro.broker.getvalue())
-
-
+cerebro.plot(style='candlestick')  # 画图
+plt.show()

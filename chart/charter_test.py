@@ -14,9 +14,7 @@ class MyTestCase(unittest.TestCase):
         title = "%s_%s_%s" % (symbol, interval, start_date)
         self.cli = Charter(sym=symbol, tit=title)
         self.cli_datasource = Akshare()
-        self.data = self.cli_datasource.stock_zh_a_hist(
-            symbol, start_date=start_date, end_date=end_date
-        )
+        self.data = self.cli_datasource.stock_zh_a_hist(symbol, start_date=start_date, end_date=end_date)
 
     def test_KChartPlotStatic(self):
         self.cli.KChartPlotStatic(self.data, metrics={"obv": "y", "vwap": "r"})

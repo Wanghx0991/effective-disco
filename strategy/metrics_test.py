@@ -12,9 +12,7 @@ class MyTestCase(unittest.TestCase):
         self.start_date = "20220815"
         self.end_date = "20220901"
         self.cli_datasource = Akshare()
-        self.data = self.cli_datasource.stock_zh_a_hist(
-            self.symbol, start_date=self.start_date, end_date=self.end_date
-        )
+        self.data = self.cli_datasource.stock_zh_a_hist(self.symbol, start_date=self.start_date, end_date=self.end_date)
 
     def test_obv(self):
         obv(self.data)

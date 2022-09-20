@@ -10,7 +10,7 @@ class Akshare:
     # 目标地址: http: //quote.eastmoney.com / concept / sh603777.html?from=classic(示例)
     # 描述: 东方财富 - 沪深京A股日频率数据;历史数据按日频率更新, 当日收盘价请在收盘后获取
     # 限量: 单次返回指定沪深京A股上市公司、指定周期和指定日期间的历史行情日频率数据
-    def stock_zh_a_hist(self, symbol, start_date, end_date, freq="daily", adjust=""):
+    def stock_zh_a_hist(self, symbol, start_date='19700101', end_date='22220901', freq="daily", adjust=""):
         if freq not in ["daily", "weekly", "monthly"]:
             raise "please input the correct the frequency: {'daily', 'weekly', 'monthly'}"
         data = ak.stock_zh_a_hist(
@@ -29,8 +29,9 @@ class Akshare:
             "ups_downs",  # 涨跌额
             "turnover",  # 换手率
         ]
-        data["date"] = pd.DatetimeIndex(data["date"])
-        data.index = data["date"]
+        data.index = pd.to_datetime()
+        # data["date"] = pd.DatetimeIndex(data["date"])
+        # data.index = data["date"]
         return data
 
     # 单只股票的分时图

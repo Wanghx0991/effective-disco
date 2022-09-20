@@ -17,9 +17,7 @@ class MyTestCase(unittest.TestCase):
         self.assertIsNotNone(data)
 
     def test_stock_zh_a_hist(self):
-        data = self.cli.stock_zh_a_hist(
-            self.symbol, start_date=self.start_date, end_date=self.end_date
-        )
+        data = self.cli.stock_zh_a_hist(self.symbol, start_date=self.start_date, end_date=self.end_date)
         self.assertIsNotNone(data)
 
 
